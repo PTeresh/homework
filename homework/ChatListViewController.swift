@@ -7,13 +7,11 @@
 
 import UIKit
 
-class ChatListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+final class ChatListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-
-    let users = ["Павел Терешонок", "Александр Стос", "Дмитрий Арбузов", "Владимир Путин", "Рик Санчес", "Алина Терешонок"]
-    var tableView = UITableView()
-    var bigButton = UIButton()
+    private let users = ["Павел Терешонок", "Александр Стос", "Дмитрий Арбузов", "Владимир Путин", "Рик Санчес", "Алина Терешонок"]
+    private let tableView = UITableView()
+    private let bigButton = UIButton()
     
     init(title: String) {
         super.init(nibName: nil, bundle: nil)
@@ -22,20 +20,29 @@ class ChatListViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-  //      tableView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-        tableView.frame = view.bounds
-        tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        tableView.register(TableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.delegate = self
         tableView.dataSource = self
         
         bigButton.setTitle("Новый чат", for: .normal)
         bigButton.backgroundColor = .systemBlue
-        bigButton.frame = CGRect(x: 0, y: view.bounds.height - 100, width: view.bounds.width, height: 50)
-        bigButton.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
         
         view.addSubview(tableView)
         view.addSubview(bigButton)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        bigButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            tableView.bottomAnchor.constraint(equalTo: bigButton.topAnchor, constant: 0),
+            bigButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            bigButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
+            bigButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0)
+        
+        
+        ])
+
     }
 
     
@@ -50,7 +57,10 @@ class ChatListViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)  as! TableViewCell
         
-//        cell.username.text = users[indexPath.row]
+        cell.username.text = users[indexPath.row]
+        cell.imageViewAvatar.image = UIImage(named: users[indexPath.row])
+        cell.timeOfLastMessage.text = "16:54"
+        cell.lastMessage.text = "Привет, как у тебя дела? Что у тебя с кошкой, она еще жива?"
         
         
         return cell
