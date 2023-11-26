@@ -12,8 +12,8 @@
 		4A33C51B2B0BAEF4009D65BA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A33C51A2B0BAEF4009D65BA /* Assets.xcassets */; };
 		4A33C51E2B0BAEF4009D65BA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4A33C51C2B0BAEF4009D65BA /* LaunchScreen.storyboard */; };
 		4A33C5262B0BAF42009D65BA /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A33C5252B0BAF42009D65BA /* TableViewController.swift */; };
-		4A33C5282B0BB8B4009D65BA /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A33C5272B0BB8B4009D65BA /* TableViewCell.swift */; };
 		4A33C52A2B0DB6E4009D65BA /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A33C5292B0DB6E4009D65BA /* ChatListViewController.swift */; };
+		4AADB2332B0E61CB00CA8BE5 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AADB2322B0E61CB00CA8BE5 /* TableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,8 +24,8 @@
 		4A33C51D2B0BAEF4009D65BA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4A33C51F2B0BAEF4009D65BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A33C5252B0BAF42009D65BA /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		4A33C5272B0BB8B4009D65BA /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		4A33C5292B0DB6E4009D65BA /* ChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
+		4AADB2322B0E61CB00CA8BE5 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +62,7 @@
 				4A33C5132B0BAEF2009D65BA /* SceneDelegate.swift */,
 				4A33C5252B0BAF42009D65BA /* TableViewController.swift */,
 				4A33C5292B0DB6E4009D65BA /* ChatListViewController.swift */,
-				4A33C5272B0BB8B4009D65BA /* TableViewCell.swift */,
+				4AADB2322B0E61CB00CA8BE5 /* TableViewCell.swift */,
 				4A33C51A2B0BAEF4009D65BA /* Assets.xcassets */,
 				4A33C51C2B0BAEF4009D65BA /* LaunchScreen.storyboard */,
 				4A33C51F2B0BAEF4009D65BA /* Info.plist */,
@@ -140,8 +140,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AADB2332B0E61CB00CA8BE5 /* TableViewCell.swift in Sources */,
 				4A33C5122B0BAEF2009D65BA /* AppDelegate.swift in Sources */,
-				4A33C5282B0BB8B4009D65BA /* TableViewCell.swift in Sources */,
 				4A33C5262B0BAF42009D65BA /* TableViewController.swift in Sources */,
 				4A33C5142B0BAEF2009D65BA /* SceneDelegate.swift in Sources */,
 				4A33C52A2B0DB6E4009D65BA /* ChatListViewController.swift in Sources */,

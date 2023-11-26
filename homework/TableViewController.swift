@@ -15,7 +15,6 @@ class TableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
     }
 
     // MARK: - Table view data source
@@ -23,19 +22,19 @@ class TableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return users.count
+        return 1
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
 
-        cell.nameOfUsers.text = users[indexPath.row]
-        cell.imageAvatar.image = UIImage(named: users[indexPath.row])
-        cell.imageAvatar.layer.cornerRadius = cell.imageAvatar.frame.size.height / 2
-        cell.imageAvatar.clipsToBounds = true
-        cell.lastMessage.text = "Привет!првиврвприврвирвирыиврыиврыирвиырвиырвиырви"
-        cell.timeOfLastMessage.text = "17:21"
+ //       cell.username.text = users[indexPath.row]
+//        cell.imageAvatar.image = UIImage(named: users[indexPath.row])
+//        cell.imageAvatar.layer.cornerRadius = cell.imageAvatar.frame.size.height / 2
+//        cell.imageAvatar.clipsToBounds = true
+//        cell.lastMessage.text = "Привет!првиврвприврвирвирыиврыиврыирвиырвиырвиырви"
+//        cell.timeOfLastMessage.text = "17:21"
 
         return cell
     }
