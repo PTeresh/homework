@@ -69,8 +69,14 @@ final class ChatListViewController: UIViewController, UITableViewDelegate, UITab
         cell.timeOfLastMessage.text = "16:54"
         cell.lastMessage.text = "Привет, как у тебя дела? Что у тебя с кошкой, она еще жива?"
         
-        
         return cell
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let chatWithUser = ChatWithUserViewController()
+        chatWithUser.selectedName = users[indexPath.row]
+        navigationController?.pushViewController(chatWithUser, animated: true)
         
     }
     
