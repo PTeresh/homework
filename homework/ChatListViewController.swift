@@ -24,6 +24,7 @@ final class ChatListViewController: UIViewController, UITableViewDelegate, UITab
         tableView.register(TableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.selectionFollowsFocus = false
         
         bigButton.setTitle("Новый чат", for: .normal)
         bigButton.backgroundColor = .systemBlue
@@ -77,7 +78,7 @@ final class ChatListViewController: UIViewController, UITableViewDelegate, UITab
         let chatWithUser = ChatWithUserViewController()
         chatWithUser.selectedName = users[indexPath.row]
         navigationController?.pushViewController(chatWithUser, animated: true)
-        
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
 }

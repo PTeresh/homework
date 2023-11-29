@@ -9,7 +9,15 @@ final class ChatWithUserViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        nameOfUser.text = selectedName
+        
+        if let nameOnScreen = selectedName {
+            nameOfUser.text = selectedName
+            title = "Чат с \(nameOnScreen)"
+        } else {
+            nameOfUser.text = "Чат"
+            title = "Чат"
+        }
+        
         layout()
     }
     
