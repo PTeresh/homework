@@ -26,7 +26,16 @@ final class ChatListViewController: UIViewController, UITableViewDelegate, UITab
         tableView.dataSource = self
         tableView.selectionFollowsFocus = false
         
-        bigButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+//        bigButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        let action = UIAction(handler: {_ in
+            let newChat = NewChatViewController()
+            self.present(newChat, animated: true, completion: nil)
+        })
+        let printAction = UIAction(handler: {_ in
+            print("Hello")
+        })
+        bigButton.addAction(action, for: .touchUpOutside)
+        bigButton.addAction(printAction, for: .touchUpInside)
         
         bigButton.setTitle("Новый чат", for: .normal)
         bigButton.backgroundColor = .systemBlue
@@ -83,10 +92,10 @@ final class ChatListViewController: UIViewController, UITableViewDelegate, UITab
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    @objc func buttonTapped() {
-        let newChat = NewChatViewController()
-       present(newChat, animated: true, completion: nil)
-    }
+//    @objc func buttonTapped() {
+//        let newChat = NewChatViewController()
+//       present(newChat, animated: true, completion: nil)
+//    }
 }
 
 
