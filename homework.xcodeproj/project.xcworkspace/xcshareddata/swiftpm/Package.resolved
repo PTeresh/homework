@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "moonkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/mooncascade/MoonKit",
+      "state" : {
+        "revision" : "90220ead5012605425afe9fb425d5abe53ad8ad3",
+        "version" : "0.2.1"
+      }
+    }
+  ],
+  "version" : 2
+}

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import MoonFoundation
 
 final class ChatListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -13,10 +14,12 @@ final class ChatListViewController: UIViewController, UITableViewDelegate, UITab
     private let tableView = UITableView()
     private let bigButton = UIButton()
     private let bottomView = UIView()
+	private let randomView = UIView()
     
     init(title: String) {
         super.init(nibName: nil, bundle: nil)
         self.title = title
+		print(users.next(after: "Александр Стос") ?? "Не нашел")
     }
     
     override func viewDidLoad() {
@@ -44,9 +47,11 @@ final class ChatListViewController: UIViewController, UITableViewDelegate, UITab
         view.addSubview(tableView)
         view.addSubview(bigButton)
         view.addSubview(bottomView)
+		view.addSubview(randomView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         bigButton.translatesAutoresizingMaskIntoConstraints = false
         bottomView.translatesAutoresizingMaskIntoConstraints = false
+		randomView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
@@ -97,6 +102,3 @@ final class ChatListViewController: UIViewController, UITableViewDelegate, UITab
 //       present(newChat, animated: true, completion: nil)
 //    }
 }
-
-
-
