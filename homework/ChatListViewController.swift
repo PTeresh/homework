@@ -17,6 +17,7 @@ final class ChatListViewController: UIViewController, UITableViewDelegate, UITab
     init(title: String) {
         super.init(nibName: nil, bundle: nil)
         self.title = title
+		
     }
     
     override func viewDidLoad() {
