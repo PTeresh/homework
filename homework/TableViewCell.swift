@@ -33,33 +33,31 @@ final class TableViewCell: UITableViewCell {
         contentView.addSubview(lastMessage)
         contentView.addSubview(timeOfLastMessage)
         contentView.addSubview(imageViewIndicator)
-        username.translatesAutoresizingMaskIntoConstraints = false
-        imageViewAvatar.translatesAutoresizingMaskIntoConstraints = false
-        lastMessage.translatesAutoresizingMaskIntoConstraints = false
-        timeOfLastMessage.translatesAutoresizingMaskIntoConstraints = false
-        imageViewIndicator.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            imageViewAvatar.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            imageViewAvatar.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            imageViewAvatar.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8),
-            imageViewAvatar.heightAnchor.constraint(equalToConstant: imageViewSize),
-            imageViewAvatar.widthAnchor.constraint(equalToConstant: imageViewSize),
-            username.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            username.leadingAnchor.constraint(equalTo: imageViewAvatar.trailingAnchor, constant: 16),
-            username.trailingAnchor.constraint(equalTo: imageViewIndicator.leadingAnchor, constant: 8),
-            imageViewIndicator.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            imageViewIndicator.trailingAnchor.constraint(equalTo:timeOfLastMessage.leadingAnchor , constant: -8),
-            imageViewIndicator.heightAnchor.constraint(equalToConstant: 16),
-            imageViewIndicator.widthAnchor.constraint(equalToConstant: 16),
-            timeOfLastMessage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
-            timeOfLastMessage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8),
-            lastMessage.leadingAnchor.constraint(equalTo: imageViewAvatar.trailingAnchor, constant: 16),
-            lastMessage.topAnchor.constraint(equalTo: username.bottomAnchor, constant: 8),
-            lastMessage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -8)
-            
-        ])
-        
 
-        
+        imageViewAvatar.snp.makeConstraints { make in
+            make.leading.equalTo(contentView.snp.leading).offset(16)
+            make.top.equalTo(contentView).offset(8)
+            make.bottom.equalTo(contentView).offset(-8)
+            make.size.equalTo(CGSize(width: imageViewSize, height: imageViewSize))
+        }
+        username.snp.makeConstraints { make in
+            make.top.equalTo(contentView).offset(8)
+            make.leading.equalTo(imageViewAvatar.snp.trailing).offset(16)
+            make.trailing.equalTo(imageViewIndicator.snp.leading).offset(-8)
+        }
+        imageViewIndicator.snp.makeConstraints { make in
+            make.top.equalTo(contentView).offset(8)
+            make.trailing.equalTo(timeOfLastMessage.snp.leading).offset(-8)
+            make.size.equalTo(CGSize(width: 16, height: 16))
+        }
+        timeOfLastMessage.snp.makeConstraints { make in
+            make.top.equalTo(contentView).offset(8)
+            make.trailing.equalTo(contentView).offset(-16)
+        }
+        lastMessage.snp.makeConstraints { make in
+            make.leading.equalTo(imageViewAvatar.snp.trailing).offset(16)
+            make.top.equalTo(username.snp.bottom).offset(8)
+            make.trailing.equalTo(contentView).offset(-16)
+        }    
     }
 }

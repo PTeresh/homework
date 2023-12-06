@@ -6,18 +6,21 @@
 //
 
 import UIKit
+import SnapKit
 
 final class ChatListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     private let users = ["Павел Терешонок", "Александр Стос", "Дмитрий Арбузов", "Владимир Путин", "Рик Санчес", "Алина Терешонок"]
+    private let favoriteUsers = ["Александр Стос", "Алина Терешонок"]
+    private let workUsers = ["Владимир Путин","Рик Санчес"]
+    private let sectionNames = ["избранные", "работа", "все чаты"]
+    
     private let tableView = UITableView()
     private let bigButton = UIButton()
-    private let bottomView = UIView()
     
     init(title: String) {
         super.init(nibName: nil, bundle: nil)
         self.title = title
-		
     }
     
     override func viewDidLoad() {
@@ -27,7 +30,6 @@ final class ChatListViewController: UIViewController, UITableViewDelegate, UITab
         tableView.dataSource = self
         tableView.selectionFollowsFocus = false
         
-//        bigButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         let action = UIAction(handler: {_ in
             let newChat = NewChatViewController()
             self.present(newChat, animated: true, completion: nil)
@@ -40,50 +42,57 @@ final class ChatListViewController: UIViewController, UITableViewDelegate, UITab
         
         bigButton.setTitle("Новый чат", for: .normal)
         bigButton.backgroundColor = .systemBlue
-        bottomView.backgroundColor = .systemBackground
+        view.backgroundColor = .systemBackground
         
         view.addSubview(tableView)
         view.addSubview(bigButton)
-        view.addSubview(bottomView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        bigButton.translatesAutoresizingMaskIntoConstraints = false
-        bottomView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            tableView.bottomAnchor.constraint(equalTo: bigButton.topAnchor, constant: 0),
-            bigButton.heightAnchor.constraint(equalToConstant: 48),
-            bigButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            bigButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
-            bigButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            bottomView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            bottomView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
-            bottomView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0),
-            bottomView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
-        ])
-
+        
+        tableView.snp.makeConstraints { make in
+            make.top.trailing.leading.equalTo(view).offset(0)
+            make.bottom.equalTo(bigButton.snp.top).offset(0)
+        }
+        bigButton.snp.makeConstraints { make in
+            make.height.equalTo(48)
+            make.leading.trailing.equalTo(view).offset(0)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(0)
+        }
     }
-
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        sectionNames.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
+        switch section {
+        case 0: return favoriteUsers.count
+        case 1: return workUsers.count
+        case 2: return users.count
+        default: return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)  as! TableViewCell
         
-        cell.username.text = users[indexPath.row]
-        cell.imageViewAvatar.image = UIImage(named: users[indexPath.row])
+        switch indexPath.section{
+        case 0: cell.username.text = favoriteUsers[indexPath.row]
+                cell.imageViewAvatar.image = UIImage(named: favoriteUsers[indexPath.row])
+        case 1: cell.username.text = workUsers[indexPath.row]
+                cell.imageViewAvatar.image = UIImage(named: workUsers[indexPath.row])
+        case 2: cell.username.text = users[indexPath.row]
+                cell.imageViewAvatar.image = UIImage(named: users[indexPath.row])
+        default:
+            break
+        }
+        
         cell.timeOfLastMessage.text = "16:54"
-        cell.lastMessage.text = "Привет, как у тебя дела? Что у тебя с кошкой, она еще жива?"
+        cell.lastMessage.text = "Привет, как у тебя дела? Что у тебя с кошкой, она еще жива? Хочу сильно есть!"
         
         return cell
-        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -93,10 +102,9 @@ final class ChatListViewController: UIViewController, UITableViewDelegate, UITab
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-//    @objc func buttonTapped() {
-//        let newChat = NewChatViewController()
-//       present(newChat, animated: true, completion: nil)
-//    }
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sectionNames[section]
+    }
 }
 
 
