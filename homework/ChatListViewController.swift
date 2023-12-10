@@ -9,11 +9,11 @@ import UIKit
 import SnapKit
 
 final class ChatListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    private let users = ["Павел Терешонок", "Александр Стос", "Дмитрий Арбузов", "Владимир Путин", "Рик Санчес", "Алина Терешонок"]
-    private let favoriteUsers = ["Александр Стос", "Алина Терешонок"]
-    private let workUsers = ["Владимир Путин","Рик Санчес"]
-    private let sectionNames = ["избранные", "работа", "все чаты"]
+    var allTitles: [String] {
+     var titles = Category.allCases.map { $0.title }
+     titles.append("Все")
+     return titles
+    }
     
     private let tableView = UITableView()
     private let bigButton = UIButton()
@@ -63,14 +63,15 @@ final class ChatListViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        sectionNames.count
+        allTitles.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0: return favoriteUsers.count
-        case 1: return workUsers.count
-        case 2: return users.count
+        case 0: return User.filterUsers(by: .favorite).count
+        case 1: return User.filterUsers(by: .work).count
+        case 2: return User.filterUsers(by: .player).count
+        case 3: return User.users.count
         default: return 0
         }
     }
@@ -78,16 +79,10 @@ final class ChatListViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)  as! TableViewCell
         
-        switch indexPath.section{
-        case 0: cell.username.text = favoriteUsers[indexPath.row]
-                cell.imageViewAvatar.image = UIImage(named: favoriteUsers[indexPath.row])
-        case 1: cell.username.text = workUsers[indexPath.row]
-                cell.imageViewAvatar.image = UIImage(named: workUsers[indexPath.row])
-        case 2: cell.username.text = users[indexPath.row]
-                cell.imageViewAvatar.image = UIImage(named: users[indexPath.row])
-        default:
-            break
-        }
+        let user = getUser(by: indexPath)
+        
+        cell.username.text = user.name
+        cell.imageViewAvatar.image = UIImage(named: user.name)
         
         cell.timeOfLastMessage.text = "16:54"
         cell.lastMessage.text = "Привет, как у тебя дела? Что у тебя с кошкой, она еще жива? Хочу сильно есть!"
@@ -96,14 +91,44 @@ final class ChatListViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let user = getUser(by: indexPath)
+        
         let chatWithUser = ChatWithUserViewController()
-        chatWithUser.selectedName = users[indexPath.row]
+        chatWithUser.selectedName = user.name
         navigationController?.pushViewController(chatWithUser, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sectionNames[section]
+        allTitles[section]
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete{
+            let user = getUser(by: indexPath)
+            tableView.performBatchUpdates {
+                User.users.removeAll(where: { $0 == user})
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+        }
+    }
+    
+    private func getUser(by indexPath: IndexPath) -> User {
+        let user: User
+        
+        switch indexPath.section{
+        case 0: user = User.filterUsers(by: .favorite)[indexPath.row]
+        case 1: user = User.filterUsers(by: .work)[indexPath.row]
+        case 2: user = User.filterUsers(by: .player)[indexPath.row]
+        case 3: user = User.users[indexPath.row]
+        default: user = User.users[indexPath.row]
+        }
+        
+        return user
     }
 }
 

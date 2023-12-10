@@ -16,6 +16,7 @@
 		4A365B802B18C61900FBD7F1 /* NewChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A365B7F2B18C61900FBD7F1 /* NewChatViewController.swift */; };
 		4A365B832B1F72BB00FBD7F1 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4A365B822B1F72BB00FBD7F1 /* SnapKit */; };
 		4A365B852B1F72BB00FBD7F1 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 4A365B842B1F72BB00FBD7F1 /* SnapKit-Dynamic */; };
+		4A365B872B25DF8000FBD7F1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A365B862B25DF8000FBD7F1 /* User.swift */; };
 		4AADB2332B0E61CB00CA8BE5 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AADB2322B0E61CB00CA8BE5 /* TableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +30,7 @@
 		4A33C5292B0DB6E4009D65BA /* ChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
 		4A365B7D2B163ED600FBD7F1 /* ChatWithUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatWithUserViewController.swift; sourceTree = "<group>"; };
 		4A365B7F2B18C61900FBD7F1 /* NewChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChatViewController.swift; sourceTree = "<group>"; };
+		4A365B862B25DF8000FBD7F1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		4AADB2322B0E61CB00CA8BE5 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -66,6 +68,7 @@
 			children = (
 				4A33C5112B0BAEF2009D65BA /* AppDelegate.swift */,
 				4A33C5132B0BAEF2009D65BA /* SceneDelegate.swift */,
+				4A365B862B25DF8000FBD7F1 /* User.swift */,
 				4A33C5292B0DB6E4009D65BA /* ChatListViewController.swift */,
 				4AADB2322B0E61CB00CA8BE5 /* TableViewCell.swift */,
 				4A365B7D2B163ED600FBD7F1 /* ChatWithUserViewController.swift */,
@@ -160,6 +163,7 @@
 				4A365B7E2B163ED600FBD7F1 /* ChatWithUserViewController.swift in Sources */,
 				4A33C5142B0BAEF2009D65BA /* SceneDelegate.swift in Sources */,
 				4A33C52A2B0DB6E4009D65BA /* ChatListViewController.swift in Sources */,
+				4A365B872B25DF8000FBD7F1 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
