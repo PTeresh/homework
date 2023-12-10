@@ -13,8 +13,8 @@ struct User: Hashable {
 }
 
 enum Category: CaseIterable {
+	case favorite
     case work
-    case favorite
     case player
     
     static var randomOrNil: Category? {
@@ -28,6 +28,14 @@ enum Category: CaseIterable {
         case .player: "Игроки"
         }
     }
+	
+	var categoryNumber: Int {
+		switch self {
+		case .favorite: 0
+		case .work: 1
+		case .player: 2
+		}
+	}
 }
 
 

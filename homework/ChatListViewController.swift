@@ -110,10 +110,26 @@ final class ChatListViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete{
             let user = getUser(by: indexPath)
-            tableView.performBatchUpdates {
-                User.users.removeAll(where: { $0 == user})
-                tableView.deleteRows(at: [indexPath], with: .fade)
-            }
+			var paths = [indexPath]
+			if let category = user.category {
+				if indexPath.section == 3 {
+					// добавить indexPath в своей категории
+					if let rowInAllSection = User.filterUsers(by: category).firstIndex(of: user) {
+						let additionalIndexPath = IndexPath(row: rowInAllSection, section: category.categoryNumber)
+						paths.append(additionalIndexPath)
+					}
+				} else {
+					// добавить indexPath во "Всех"
+					if let rowInAllSection = User.users.firstIndex(of: user) {
+						let additionalIndexPath = IndexPath(row: rowInAllSection, section: 3)
+						paths.append(additionalIndexPath)
+					}
+				}
+			} else {
+				// [indexPath]
+			}
+			User.users.removeAll(where: { $0 == user})
+			tableView.deleteRows(at: paths, with: .fade)
         }
     }
     
